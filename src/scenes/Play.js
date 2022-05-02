@@ -34,7 +34,6 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
-        this.p1time = game.settings.gameTimer;
         this.p1Score = 0;
         let scoreConfig = {
             fontFamily: 'Courier',
