@@ -28,7 +28,6 @@ class Play extends Phaser.Scene {
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);0
-        this.timeleft = 20000;
         this.anims.create({
             key: 'explode',
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
@@ -47,13 +46,12 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
           }
+          this.timeleft = 7200;
           this.timeMid = this.add.text(game.config.width/2 - scoreConfig.fixedWidth/2, borderUISize + borderPadding*2, this.timeLeft, scoreConfig);
           this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
           scoreConfig.fixedWidth = 0;
-          this.gameOver = false;
-        this.speed = this.time.delayedCall(game.settings.gameTimer/2, () =>{
-          
-        })
+          this.gameOver = false;          
+
         this.clock = this.time.delayedCall(this.timeleft, () => {
         this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
