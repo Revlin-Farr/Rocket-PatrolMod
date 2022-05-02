@@ -46,12 +46,11 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
           }
-          this.timeleft = 7200;
-          this.timeMid = this.add.text(game.config.width/2 - scoreConfig.fixedWidth/2, borderUISize + borderPadding*2, this.timeLeft, scoreConfig);
-          this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-          scoreConfig.fixedWidth = 0;
-          this.gameOver = false;          
-
+        this.timeleft = 7200;
+        this.timeMid = this.add.text(game.config.width/2 - scoreConfig.fixedWidth/2, borderUISize + borderPadding*2, this.timeLeft, scoreConfig);
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+        scoreConfig.fixedWidth = 0;
+        this.gameOver = false;          
         this.clock = this.time.delayedCall(this.timeleft, () => {
         this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
@@ -59,10 +58,6 @@ class Play extends Phaser.Scene {
         }, null, this);
         }
     update(){
-      if (this.timeLeft > 0) {
-        this.timeLeft -= 1;
-        this.timeMid.text = Math.floor(this.timeLeft / 120);
-    }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
             }
@@ -77,6 +72,10 @@ class Play extends Phaser.Scene {
         this.ship03.update();
         this.ship04.update();
         }
+        if (this.timeLeft > 0) {
+          this.timeLeft -= 1;
+          this.timeMid.text = Math.floor(this.timeLeft / 120);
+      }
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship03);   
@@ -84,12 +83,10 @@ class Play extends Phaser.Scene {
           if (this.checkCollision(this.p1Rocket, this.ship02)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship02);
-            game.settings.gameTimer +   2000;
           }
           if (this.checkCollision(this.p1Rocket, this.ship01)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship01);
-            game.settings.gameTimer += 2000;
           }
         if (this.checkCollision(this.p1Rocket, this.ship04)) {
             this.p1Rocket.reset();
